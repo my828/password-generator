@@ -41,12 +41,12 @@ function promptLengthOfPassword() {
     return null;
   }
   if (isNaN(passwordLength)) {
-    alert("Please enter a number");
-    passwordLength = promptLengthOfPassword();
+    alert("Please enter a number!");
+    return promptLengthOfPassword();
   }
   if (passwordLength < 8 || passwordLength > 128) {
-    alert("Length should be between 8 and 128 characters");
-    passwordLength = promptLengthOfPassword();
+    alert("Length should be between 8 and 128 characters!");
+    return promptLengthOfPassword();
   }
   return passwordLength;
 }
@@ -68,8 +68,10 @@ function promptCharacterTypes() {
 
 function writePassword() {
   var password = generatePassword();
-  document.getElementsByClassName("tooltip")[0].style.display = "block";
-  passwordText.value = password;
+  if (password) {
+    document.getElementsByClassName("tooltip")[0].style.display = "block";
+    passwordText.value = password;
+  }
 }
 
 generateBtn.addEventListener("click", writePassword);
@@ -83,7 +85,7 @@ function handleCopy() {
   document.execCommand("copy");
 
   var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Copied: " + passwordText.value;
+  tooltip.innerHTML = "Copied!";
 }
 copyBtn.addEventListener("click", handleCopy);
 copyBtn.addEventListener("mouseout", () => {
