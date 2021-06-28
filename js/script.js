@@ -1,4 +1,3 @@
-var generateBtn = document.querySelector("#generate");
 let CHARACTER_TYPES = [
   "lowercase",
   "uppercase",
@@ -10,6 +9,11 @@ const UPPERCASE = LOWERCASE.toUpperCase();
 const NUMERIC = "0123456789";
 const SPECIAL = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 const characterTypesArr = [LOWERCASE, UPPERCASE, NUMERIC, SPECIAL];
+
+let generateBtn = document.querySelector("#generate");
+let copyBtn = document.querySelector(".tooltip");
+let passwordText = document.querySelector("#password");
+
 function generatePassword() {
   alert("First, let's choose the length of your password!");
   let passwordLength = promptLengthOfPassword();
@@ -26,7 +30,6 @@ function generatePassword() {
       Math.floor(Math.random() * randomTypeStr.length)
     );
   }
-  console.log(password);
   return password;
 }
 function promptLengthOfPassword() {
@@ -62,13 +65,28 @@ function promptCharacterTypes() {
 
   return result;
 }
-// Write password to the #password input
+
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
+  document.getElementsByClassName("tooltip")[0].style.display = "block";
   passwordText.value = password;
 }
 
-// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+function handleCopy() {
+  /* Select the text field */
+  passwordText.select();
+  passwordText.setSelectionRange(0, 99999); /* For mobile devices */
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copied: " + passwordText.value;
+}
+copyBtn.addEventListener("click", handleCopy);
+copyBtn.addEventListener("mouseout", () => {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy to clipboard";
+});

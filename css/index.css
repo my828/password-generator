@@ -52,6 +52,7 @@ header {
 
 .card-body {
   min-height: 100px;
+  position: relative;
 }
 
 .card-footer {
@@ -130,6 +131,46 @@ button[disabled] {
   }
 }
 
+.tooltip {
+  display: none;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.tooltip:hover {
+  cursor: pointer;
+}
+.tooltip .tooltiptext {
+  font-size: 18px;
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  z-index: 1;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  /* margin-left: -5px; */
+  border-width: 8px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
